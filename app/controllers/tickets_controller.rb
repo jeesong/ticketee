@@ -5,6 +5,7 @@ class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
 
   def new
+    # build method made available by the has_many association in model
     @ticket = @project.tickets.build
   end
 
