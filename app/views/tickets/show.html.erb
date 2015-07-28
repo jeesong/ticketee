@@ -5,6 +5,9 @@
 
   <div class="page-header">
     <h2><%= @ticket.title %></h2>
+    <p id="author">
+      Created by <%= @ticket.author.email %>, <%= time_ago_in_words(@ticket.created_at) %>
+    </p>
 
     <ul class="actions">
       <li><%= link_to "Edit Ticket", [:edit, @project, @ticket], class: "edit" %></li>
