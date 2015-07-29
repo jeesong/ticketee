@@ -1,8 +1,16 @@
 require 'rails_helper'
 
 RSpec.feature "Creating Projects" do 
+  let!(:admin_user) { FactoryGirl.create(:admin_user) }
+
   before do 
+    # not sure why this doesn't work
+    # sign_in_as!(FactoryGirl.create(:admin_user))
     visit "/"
+    click_link "Sign in"
+    fill_in "Email", with: admin_user.email
+    fill_in "Password", with: "password"
+    click_button "Sign in"
 
     click_link "New Project"
   end
