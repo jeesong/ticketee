@@ -18,4 +18,6 @@ end
 
 RSpec.configure do |config|
   config.include SigninHelpers, :type => :feature
+  config.include SigninHelpers, :type => :controller
+  config.include Capybara::DSL, :type => :controller
 end
