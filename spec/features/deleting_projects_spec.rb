@@ -1,6 +1,13 @@
 require "rails_helper"
+require "support/signin_helpers"
 
 RSpec.feature 'Deleting Projects' do 
+  let(:admin) { FactoryGirl.create(:admin_user) }
+
+  before do 
+    admin_sign_in(admin)
+  end
+
   scenario "Deleting a project" do 
     FactoryGirl.create(:project, name: "Sublime Text 3")
 

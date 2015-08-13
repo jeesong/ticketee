@@ -1,8 +1,12 @@
 require "rails_helper"
+require "support/signin_helpers"
 
 RSpec.feature "Editing Projects" do 
+  let(:admin) { FactoryGirl.create(:admin_user) }
+
   # help set up state for multiple tests, block runs before each test executes
   before do 
+    admin_sign_in(admin)
     FactoryGirl.create(:project, name: "Sublime Text 3")
 
     visit "/"
