@@ -10,16 +10,10 @@ RSpec.describe Admin::UsersController, :type => :controller do
     end
 
     it "are not able to access the index action" do 
+      # knows index is assocaited to the admin/users controller
       get 'index'
       expect(response).to redirect_to('/')
       expect(flash[:alert]).to eql("You must be an admin to do that.")
     end
   end
-
-  # describe "GET index" do
-  #   it "returns http success" do
-  #     get :index
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
 end
