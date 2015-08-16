@@ -3,6 +3,6 @@
   <% @users.each do |user| %>
     <!-- passing array in link_to makes sure we use admin_user_path -->
     <!-- instead of user_path -->
-    <li><%= link_to user.email, [:admin, user] %></li>
+    <li><%= link_to user, [:admin, user] %></li>
   <% end %>
 </ul>
