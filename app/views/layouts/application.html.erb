@@ -37,6 +37,11 @@
             Signed in as <%= current_user.email %>
           </li>
           <li>
+            <% admins_only do %>
+              <%= link_to "Admin", admin_root_path %>
+            <% end %>
+          </li>
+          <li>
             <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
           </li>
         </ul>

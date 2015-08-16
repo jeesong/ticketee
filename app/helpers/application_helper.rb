@@ -9,7 +9,7 @@ module ApplicationHelper
 
   # takes a block, which is the code between the do & end on the app view
   def admins_only(&block)
-    # Try method tried a method on a object, if method doesn't exist, gives up and returns nil instead
+    # Try method tries a method on a object, if method doesn't exist, gives up and returns nil instead
     # of nomethoderror
     block.call if current_user.try(:admin?)
   end
