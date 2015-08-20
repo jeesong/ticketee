@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def require_signin!
     if current_user.nil?
       flash[:alert] = "You need to sign in or sign up before continuing."
-      # redirect_to root_path
+      redirect_to root_path
     end
   end
   helper_method :require_signin!

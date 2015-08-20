@@ -1,4 +1,6 @@
 require 'rails_helper'
+require "support/signin_helpers"
+require "support/authorization_helpers"
 
 RSpec.feature 'Editing Tickets' do 
   let!(:project) { FactoryGirl.create(:project) }
@@ -8,6 +10,8 @@ RSpec.feature 'Editing Tickets' do
   end
   
   before do 
+    define_permission!(user, "view", project)
+    login_as(user)
     visit project_ticket_path(project, ticket)
     click_link "Edit Ticket"
   end 

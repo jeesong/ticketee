@@ -1,9 +1,12 @@
 require "rails_helper"
+require "support/signin_helpers"
+require "support/authorization_helpers"
 
 RSpec.feature "Viewing tickets" do 
   before do 
     user = FactoryGirl.create(:user)
     sublime = FactoryGirl.create(:project, name: "Sublime Text 3")
+    define_permission!(user, "view", sublime)
 
     FactoryGirl.create(:ticket,
       project: sublime,
@@ -12,6 +15,7 @@ RSpec.feature "Viewing tickets" do
       author: user)
 
     ie = FactoryGirl.create(:project, name: "Internet Explorer")
+    define_permission!(user, "view", ie)
 
     FactoryGirl.create(:ticket,
       project: ie,
@@ -19,6 +23,7 @@ RSpec.feature "Viewing tickets" do
       description: "Isn't a joke.",
       author: user)
 
+    login_as(user)
     visit "/"
   end
 

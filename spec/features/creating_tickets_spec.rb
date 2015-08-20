@@ -1,11 +1,14 @@
 require 'rails_helper'
+require "support/signin_helpers"
+require "support/authorization_helpers"
 
 RSpec.feature "Creating Tickets" do 
-  let(:user) { FactoryGirl.create(:user) }
-
   before do
+    project = FactoryGirl.create(:project, name: "Internet Explorer")
+    user = FactoryGirl.create(:user)
+    define_permission!(user, "view", project)
+    @email = user.email 
     login_as(user)
-    FactoryGirl.create(:project, name: "Internet Explorer")
 
     visit "/"
     click_link "Internet Explorer"
@@ -19,7 +22,7 @@ RSpec.feature "Creating Tickets" do
 
     expect(page).to have_content("Ticket has been created.")
     within("#ticket #author") do 
-      expect(page).to have_content("Created by #{user.email}")
+      expect(page).to have_content("Created by #{@email}")
     end
   end
 
