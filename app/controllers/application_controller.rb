@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
     if current_user.nil?
       flash[:alert] = "You need to sign in or sign up before continuing."
       redirect_to root_path
+      # redirect_to new_user_session_path
     end
   end
   helper_method :require_signin!
@@ -20,6 +21,7 @@ class ApplicationController < ActionController::Base
     unless current_user.try(:admin?)
       flash[:alert] = "You must be an admin to do that."
       redirect_to root_path
+      # redirect_to(:action => :index) and return
     end
   end
 end

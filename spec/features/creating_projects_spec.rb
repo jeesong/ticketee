@@ -16,16 +16,16 @@ RSpec.feature "Creating Projects" do
   end
 
   scenario "A user can create a new project" do
-    fill_in "Name", with: "Sublime Text 3"
+    fill_in "Name", with: "Fall Coding Work"
     fill_in "Description", with: "A text editor for everyone"
     click_button "Create Project"
 
     expect(page).to have_content("Project has been created.")
 
-    project = Project.find_by(name: "Sublime Text 3")
+    project = Project.find_by(name: "Fall Coding Work")
     expect(page.current_url).to eql(project_url(project))
 
-    title = "Sublime Text 3 - Projects - Ticketee"
+    title = "Fall Coding Work - Projects - Ticketee"
     expect(page).to have_title(title)
   end
 

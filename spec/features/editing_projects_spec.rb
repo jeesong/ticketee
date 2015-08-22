@@ -7,15 +7,15 @@ RSpec.feature "Editing Projects" do
   # help set up state for multiple tests, block runs before each test executes
   before do 
     admin_sign_in(admin)
-    FactoryGirl.create(:project, name: "Sublime Text 3")
+    FactoryGirl.create(:project, name: "Fall Coding Project")
 
     visit "/"
-    click_link "Sublime Text 3"
+    click_link "Fall Coding Project"
     click_link "Edit Project"
   end
 
   scenario "Updating a project" do 
-    fill_in "Name", with: "Sublime Text 3 beta"
+    fill_in "Name", with: "Fall Coding Project beta"
     click_button "Update Project"
 
     expect(page).to have_content("Project has been updated.")

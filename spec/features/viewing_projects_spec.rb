@@ -2,25 +2,26 @@ require "rails_helper"
 require "support/signin_helpers"
 require "support/authorization_helpers"
 
-# RSpec.feature "Viewing projects" do
-#   scenario "Listing all projects" do 
-#     project = FactoryGirl.create(:project, name: "Sublime Text 3")
-#     visit "/"
-#     click_link "Sublime Text 3"
-#     expect(page.current_url).to eql(project_url(project))
-#   end
-# end
-
-RSpec.feature "Viewing projects" do 
+RSpec.feature "Viewing projects" do
   let!(:user) { FactoryGirl.create(:user) }
-  let!(:project) { FactoryGirl.create(:project) }
+  let!(:admin) { FactoryGirl.create(:admin_user) }
+  project = FactoryGirl.create(:project, name: "Sublime Text 3")
 
-  before do 
+  scenario "Listing no projects" do 
     user_sign_in(user)
-    define_permission!(user, :view, project)
+    visit "/"
+    expect(page).to_not have_content("Sublime Text 3")
   end
 
-  scenario "Listing all projects" do 
+  scenario "Listing all projects for admin" do 
+    admin_sign_in(admin)
+    visit "/"
+    expect(page).to have_content("Sublime Text 3")
+  end
+
+  scenario "Listing project for user" do 
+    user_sign_in(user)
+    define_permission!(user, :view, project)
     visit '/'
     click_link project.name 
 
