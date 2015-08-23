@@ -43,6 +43,7 @@ gem "bootstrap-sass", "~> 3.3"
 gem "font-awesome-rails", "~> 4.2"
 gem "simple_form", "3.1.0"
 gem "devise", "~> 3.4.1"
+gem "cancan", "~> 1.6.10"
 
 group :test do
   gem 'capybara', '~> 2.4'

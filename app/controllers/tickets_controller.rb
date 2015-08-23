@@ -1,9 +1,10 @@
 class TicketsController < ApplicationController
   # Tickets resource is only accessible through a project, want to have @project work with all actions 
   # in the controller
+  before_action :require_signin!
   before_action :set_project
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
-  before_action :require_signin!
+  before_action :authorize_create!, only: [:new, :create]  
 
   def new
     # build method made available by the has_many association in model
@@ -51,6 +52,8 @@ class TicketsController < ApplicationController
   def set_project
     # project_id is made available via Rails routing
     # @project = Project.find(params[:project_id])
+
+    # now need @project to only look for projects the user has permission seeing
     @project = Project.for(current_user).find(params[:project_id])
 
     rescue ActiveRecord::RecordNotFound
@@ -64,5 +67,12 @@ class TicketsController < ApplicationController
 
   def ticket_params
     params.require(:ticket).permit(:title, :description)
+  end
+
+  def authorize_create!
+    if !current_user.admin? && cannot?("create tickets".to_sym, @project)
+      flash[:alert] = "You cannot create tickets on this project."
+      redirect_to @project
+    end
   end
 end
