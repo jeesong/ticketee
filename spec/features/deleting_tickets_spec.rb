@@ -11,6 +11,7 @@ RSpec.feature 'Deleting Tickets' do
 
   before do 
     define_permission!(user, "view", project)
+    define_permission!(user, "delete tickets", project)
     login_as(user)
     visit project_ticket_path(project, ticket)
   end
