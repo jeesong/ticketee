@@ -10,11 +10,19 @@
     </p>
 
     <ul class="actions">
-      <li><%= link_to "Edit Ticket", [:edit, @project, @ticket], class: "edit" %></li>
-      <li><%= link_to "Delete Ticket", [@project, @ticket], 
-        method: :delete, 
-        data: { confirm: "Are you sure you want to delete this ticket?" },
-        class: "delete" %></li>
+      <li>
+        <% authorized?(:"edit tickets", @project) do %>
+          <%= link_to "Edit Ticket", [:edit, @project, @ticket], class: "edit" %>
+        <% end %>
+      </li>
+      <li>
+        <% authorized?(:"delete tickets", @project) do %>
+          <%= link_to "Delete Ticket", [@project, @ticket], 
+          method: :delete, 
+          data: { confirm: "Are you sure you want to delete this ticket?" },
+          class: "delete" %>
+        <% end %>
+      </li>
     </ul>
   </div>
 
