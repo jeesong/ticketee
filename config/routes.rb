@@ -8,7 +8,12 @@ Rails.application.routes.draw do
 
   namespace :admin do 
     root :to => "base#index"
-    resources :users
+    resources :users do 
+      resources :permissions
+      # only respond to PUT requests to this route, controller and action defined by to: sybmbol
+      put "permissions", to: "permissions#set", 
+                         as: "set_permissions"
+    end
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
