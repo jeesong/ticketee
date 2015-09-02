@@ -8,6 +8,9 @@ class Admin::PermissionsController < Admin::BaseController
 
   def set
     @user.permissions.clear
+    # key-value pairs are sent over in params[:permissions]
+    # like {"1" => {"view"=>"1"}} : first key is id of the project
+    # hash contains the permission of that project
     params[:permissions].each do |id, permissions|
       project = Project.find(id)
       permissions.each do |permission, checked|
