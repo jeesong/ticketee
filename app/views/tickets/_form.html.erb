@@ -2,10 +2,15 @@
 <%= simple_form_for [project, ticket], html: { multipart: true } do |f| %>
   <%= f.input :title %>
   <%= f.input :description %>
-  <p>
-    <%= f.label :asset, "File" %><br>
-    <%= f.file_field :asset %>
-  </p>
-
+  <% number = 0 %>
+  <!-- fields_for :assets tells name of nested fields -->
+  <!-- now has name attribute of ticket[assets][asset] -->
+  <!-- available in the controller as params[:ticket][:assets][:asset] -->
+  <%= f.fields_for :assets do |asset| %>
+    <p>
+      <%= asset.label :asset, "File ##{number += 1}" %>
+      <%= asset.file_field :asset %>
+    </p>
+  <% end %>
   <%= f.button :submit, class: "btn-primary" %>
 <% end %>
