@@ -1,7 +1,11 @@
 <!-- array in simple form to post to a nested route -->
-<%= simple_form_for [project, ticket] do |f| %>
+<%= simple_form_for [project, ticket], html: { multipart: true } do |f| %>
   <%= f.input :title %>
   <%= f.input :description %>
+  <p>
+    <%= f.label :asset, "File" %><br>
+    <%= f.file_field :asset %>
+  </p>
 
   <%= f.button :submit, class: "btn-primary" %>
 <% end %>
