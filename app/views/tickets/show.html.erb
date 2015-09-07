@@ -35,7 +35,7 @@
       <% @ticket.assets.each do |asset| %>
         <p>
         <!-- use the url method to provide a link to download file -->
-          <%= link_to File.basename(asset.asset.path), asset.asset.url %>
+          <%= link_to File.basename(asset.asset.path), file_path(asset) %>
         </p>
         <p>
           <small><%= number_to_human_size(asset.asset.size) %></small>
