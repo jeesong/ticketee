@@ -1,0 +1,16 @@
+<!-- To use nested attributes in the view, use fields_for -->
+<!-- fields_for :assets tells name of nested fields -->
+<!-- now has name attribute of ticket[assets][asset] -->
+<!-- available in the controller as params[:ticket][:assets][:asset] -->
+<div id="files">
+  <%= fields_for @ticket do |f| %>
+    <p>
+      <%= f.fields_for :assets, :child_index => number do |asset| %>
+        <p>
+          <%= asset.label :asset, "File ##{number += 1}" %>
+          <%= asset.file_field :asset %>
+        </p>
+      <% end %>
+    </p>
+  <% end %>
+</div>

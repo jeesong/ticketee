@@ -11,7 +11,8 @@ class TicketsController < ApplicationController
   def new
     # build method made available by the has_many association in model
     @ticket = @project.tickets.build
-    3.times { @ticket.assets.build }
+    # 3.times { @ticket.assets.build }
+    @ticket.assets.build
   end
 
   def create
