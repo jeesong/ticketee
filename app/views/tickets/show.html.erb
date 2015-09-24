@@ -7,8 +7,8 @@
     <h2><%= @ticket.title %></h2>
     <p id="author">
       Created by <%= @ticket.author.email %>, <%= time_ago_in_words(@ticket.created_at) %>
+      <%= render @ticket.state if @ticket.state %>
     </p>
-
     <ul class="actions">
       <li>
         <% authorized?(:"edit tickets", @project) do %>
