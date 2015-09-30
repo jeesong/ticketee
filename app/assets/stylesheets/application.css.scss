@@ -1,6 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
+@import "states";
 
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
@@ -95,4 +96,8 @@ body {
 
 p#author {
   font-style: italic;
+}
+
+.megastate {
+  display:inline-block;
 }

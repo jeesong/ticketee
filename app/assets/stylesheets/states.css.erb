@@ -1,0 +1,8 @@
+<% State.all.each do |state| %>
+  .state_<%= state.name.parameterize %> {
+    background: <%= state.background %>;
+    color: <%= state.color %>;
+    max-width: 50px;
+    display: inline;
+  }
+<% end %>
