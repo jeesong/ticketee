@@ -12,7 +12,11 @@ Rails.application.routes.draw do
 
   namespace :admin do 
     root :to => "base#index"
-    resources :states
+    resources :states do 
+      member do 
+        get :make_default
+      end
+    end
     resources :users do 
       resources :permissions
       # only respond to PUT requests to this route, controller and action defined by to: sybmbol
