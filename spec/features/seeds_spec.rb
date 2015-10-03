@@ -10,6 +10,7 @@ feature "Seed Data" do
   before do 
     define_permission!(user, "view", project)
     define_permission!(user, "create tickets", project)
+    define_permission!(user, "change states", project)
 
     login_as(user)
     visit '/'
