@@ -2,6 +2,7 @@
 <%= simple_form_for [project, ticket], html: { multipart: true } do |f| %>
   <%= f.input :title %>
   <%= f.input :description %>
+  <%= f.input :tag_names %>
   <% number = 0 %>
   <%= render partial: "files/form", locals: { number: number } %>
   <%= f.button :submit, class: "btn-primary" %>
