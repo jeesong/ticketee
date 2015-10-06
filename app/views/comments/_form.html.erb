@@ -4,5 +4,6 @@
   <% authorized?(:"change states", @project) do %>
     <%= f.input :state_id, collection: @states.map { |s| [s.name, s.id] }, selected: @ticket.state_id %>
   <% end %>
+  <%= f.input :tag_names %>
   <%= f.button :submit, class: "btn-primary" %>
 <% end %>
