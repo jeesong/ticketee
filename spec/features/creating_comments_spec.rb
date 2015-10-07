@@ -9,6 +9,7 @@ feature "Creating comments" do
 
   before do 
     define_permission!(user, "view", project)
+    define_permission!(user, "tag", project)
     FactoryGirl.create(:state, name: "Open")
 
     login_as(user)
