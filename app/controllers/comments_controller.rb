@@ -30,11 +30,11 @@ class CommentsController < ApplicationController
     end
 
     def sanitize_parameters!
-      if cannot?(:"change states", @ticket.project)
+      if !current_user.admin? && cannot?(:"change states", @ticket.project)
         params[:comment].delete(:state_id)
       end
 
-      if cannot?(:tag, @ticket.project)
+      if !current_user.admin? && cannot?(:tag, @ticket.project)
         params[:comment].delete(:tag_names)
       end
     end
