@@ -14,7 +14,7 @@ class Comment < ActiveRecord::Base
 
   # callback after comment is created
   after_create :set_ticket_state
-  # after_create :associate_tags_with_ticket
+  after_create :associate_tags_with_ticket
 
   # allows you to call comment.project, which is really doing ticket.project
   delegate :project, to: :ticket
@@ -25,15 +25,15 @@ class Comment < ActiveRecord::Base
       self.previous_state = ticket.state
     end
 
-    # def associate_tags_with_ticket
-    #   if tag_names
-    #     tags = tag_names.split(" ").map do |name|
-    #       Tag.find_or_create_by(name: name)
-    #     end
-    #     self.ticket.tags += tags
-    #     self.ticket.save
-    #   end
-    # end
+    def associate_tags_with_ticket
+      if tag_names
+        tags = tag_names.split(" ").map do |name|
+          Tag.find_or_create_by(name: name)
+        end
+        self.ticket.tags += tags
+        self.ticket.save
+      end
+    end
 
     def set_ticket_state
       self.ticket.state = self.state 
