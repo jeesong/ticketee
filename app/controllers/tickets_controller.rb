@@ -16,7 +16,7 @@ class TicketsController < ApplicationController
   end
 
   def create
-    if cannot?(:tag, @project)
+    if !current_user.admin? && cannot?(:"tag", @project)
       params[:ticket].delete(:tag_names)
     end
     
